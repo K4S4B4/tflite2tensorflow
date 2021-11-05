@@ -22,4 +22,7 @@ if __name__ == "__main__":
         packages=find_packages(),
         platforms=["linux", "unix"],
         python_requires=">3.6",
+        entry_points = {
+        'console_scripts': ['tflite2tensorflowMod = tflite2tensorflow.tflite2tensorflow:main']
+        },
     )
