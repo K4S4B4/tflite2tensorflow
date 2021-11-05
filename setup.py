@@ -17,7 +17,7 @@ if __name__ == "__main__":
         long_description_content_type="text/markdown",
         author="Katsuya Hyodo",
         author_email="rmsdh122@yahoo.co.jp",
-        url="https://github.com/PINTO0309/tflite2tensorflow",
+        url="https://github.com/K4S4B4/tflite2tensorflow",
         license="MIT License",
         packages=find_packages(),
         platforms=["linux", "unix"],
