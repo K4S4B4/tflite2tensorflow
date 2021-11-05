@@ -5921,8 +5921,8 @@ def main():
                     traceback.print_exc()
             else:
                 pass
-        input_shapes = tf_inputs
-        input_shapes_permutations = list(itertools.permutations(input_shapes))
+        # input_shapes = tf_inputs
+        # input_shapes_permutations = list(itertools.permutations(input_shapes))
 
         def representative_dataset_gen():
             if calib_ds_type == 'tfds':
