@@ -9,8 +9,7 @@ scripts = ["scripts/"+i for i in listdir("scripts")]
 
 if __name__ == "__main__":
     setup(
-        name="tflite2tensorflow",
-        scripts=scripts,
+        name="tflite2tensorflowMod",
         version="1.14.5",
         description="Generate saved_model, tfjs, tf-trt, EdgeTPU, CoreML, quantized tflite, ONNX, OpenVINO, Myriad Inference Engine blob and .pb from .tflite.",
         long_description=long_description,
