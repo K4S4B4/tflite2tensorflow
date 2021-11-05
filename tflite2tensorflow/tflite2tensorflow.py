@@ -5793,22 +5793,22 @@ def main():
             # The official TensorFlow TFLite Interpreter
             from tensorflow.lite.python.interpreter import Interpreter as tflite_interpreter
 
-        interpreter = tflite_interpreter(model_path)
-        interpreter.allocate_tensors()
-        input_details = interpreter.get_input_details()
-        output_details = interpreter.get_output_details()
-        print('inputs:')
-        input_node_names = []
-        tf_inputs = []
-        for input in input_details:
-            pprint.pprint(input)
-            input_node_names.append(input['name']+':0')
-            tf_inputs.append(input['shape'])
-        print('outputs:')
-        output_node_names = []
-        for output in output_details:
-            pprint.pprint(output)
-            output_node_names.append(output['name']+':0')
+        # interpreter = tflite_interpreter(model_path)
+        # interpreter.allocate_tensors()
+        # input_details = interpreter.get_input_details()
+        # output_details = interpreter.get_output_details()
+        # print('inputs:')
+        # input_node_names = []
+        # tf_inputs = []
+        # for input in input_details:
+        #     pprint.pprint(input)
+        #     input_node_names.append(input['name']+':0')
+        #     tf_inputs.append(input['shape'])
+        # print('outputs:')
+        # output_node_names = []
+        # for output in output_details:
+        #     pprint.pprint(output)
+        #     output_node_names.append(output['name']+':0')
 
         # No Quantization - Input/Output=float32
         if output_no_quant_float32_tflite:
@@ -6207,37 +6207,37 @@ def main():
                 import traceback
                 traceback.print_exc()
 
-            try:
-                print(f'{Color.REVERCE}ONNX optimization started{Color.RESET}', '=' * 59)
-
-                # onnxoptimizer
-                import onnx
-                import onnxoptimizer
-                onnx_model = onnx.load(f'{model_output_path}/model_float32.onnx')
-                passes = [
-                    "extract_constant_to_initializer",
-                    "eliminate_unused_initializer"
-                ]
-                optimized_model = onnxoptimizer.optimize(onnx_model, passes)
-                onnx.save(optimized_model, f'{model_output_path}/model_float32.onnx')
-
-                # onnx-simplifier
-                result = subprocess.check_output(
-                    [
-                        'python3',
-                        '-m', 'onnxsim',
-                        f'{model_output_path}/model_float32.onnx',
-                        f'{model_output_path}/model_float32.onnx'
-                    ],
-                    stderr=subprocess.PIPE
-                ).decode('utf-8')
-                print(result)
-
-                print(f'{Color.GREEN}ONNX optimization complete!{Color.RESET} - {model_output_path}/model_float32.onnx')
-            except subprocess.CalledProcessError as e:
-                print(f'{Color.YELLOW}WARNING:{Color.RESET}', e.stderr.decode('utf-8'))
-                import traceback
-                traceback.print_exc()
+            # try:
+            #     print(f'{Color.REVERCE}ONNX optimization started{Color.RESET}', '=' * 59)
+ 
+            #     # onnxoptimizer
+            #     import onnx
+            #     import onnxoptimizer
+            #     onnx_model = onnx.load(f'{model_output_path}/model_float32.onnx')
+            #     passes = [
+            #         "extract_constant_to_initializer",
+            #         "eliminate_unused_initializer"
+            #     ]
+            #     optimized_model = onnxoptimizer.optimize(onnx_model, passes)
+            #     onnx.save(optimized_model, f'{model_output_path}/model_float32.onnx')
+ 
+            #     # onnx-simplifier
+            #     result = subprocess.check_output(
+            #         [
+            #             'python3',
+            #             '-m', 'onnxsim',
+            #             f'{model_output_path}/model_float32.onnx',
+            #             f'{model_output_path}/model_float32.onnx'
+            #         ],
+            #         stderr=subprocess.PIPE
+            #     ).decode('utf-8')
+            #     print(result)
+ 
+            #     print(f'{Color.GREEN}ONNX optimization complete!{Color.RESET} - {model_output_path}/model_float32.onnx')
+            # except subprocess.CalledProcessError as e:
+            #     print(f'{Color.YELLOW}WARNING:{Color.RESET}', e.stderr.decode('utf-8'))
+            #     import traceback
+            #     traceback.print_exc()
 
         # OpenVINO IR and DepthAI blob convert
         if output_openvino_and_myriad:
